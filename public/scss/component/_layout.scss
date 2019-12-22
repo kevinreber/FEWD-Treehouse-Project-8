@@ -1,0 +1,83 @@
+body{
+    background-color: $color-gray;
+    width: 95%;
+    margin: auto;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $color-blue;
+    width: 100%;
+    margin: 0;
+    box-shadow: 0 2px 10px 2px $color-shadow;
+
+    & h1{
+        margin-left: 2rem;
+        color: $color-gray;
+    }
+}
+
+main{
+    margin-top: 104px;
+}
+
+.employee {
+    &-card {
+        display: flex;
+        justify-content: flex-start;
+        background-color: #ffffff;
+        padding: 1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 0 8px 0 $color-black;
+        transition: all .2s linear;
+
+        //Add transition
+        &:hover {
+            box-shadow: 0 0 8px 0 $color-golden;
+            
+            & img{
+                border: 3px solid $color-golden;
+                box-shadow: 0 0 8px 0 $color-golden;
+            }
+
+            & h3{
+                color: $color-golden;
+            }
+        }
+
+        & img {
+            width: 120px;
+            height: 120px;
+            margin: auto 2rem auto 1rem;
+            border-radius: 100%;
+            border: 3px solid $color-blue;
+            object-fit: cover;
+            transition: all .2s linear;
+        }
+        & h3{
+            color: $color-blue;
+            transition: all .2s linear;
+        }
+
+        & .card-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+
+#employee {
+    &-list {
+        display: grid;
+        width: 100%;
+        margin: 0 auto;
+        grid-template-rows: repeat(4, 1dr);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+}

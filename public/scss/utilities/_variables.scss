@@ -1,0 +1,12 @@
+//Global Colors
+$color-golden: goldenrod;
+$color-black: #333333;
+$color-gray: #f4f4f4;
+$color-drkgray: darken($color-gray, 15%);
+$color-shadow: darken($color-gray, 50%);
+$color-blue: #3D464F;
+
+//Media Query Sizes
+$small: 320px;
+$medium: 768px;
+$desktop: 1024px;
