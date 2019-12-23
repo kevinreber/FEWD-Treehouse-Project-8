@@ -10,15 +10,12 @@ const cards = employeeList.children;
 let employeeData = {};
 let employeeIndex;
 
-function fetchData(url) {
-    return fetch(url)
-        .then(checkStatus)
-        .then(res => res.json())
-        .then(storeData)
-        .then(displayData)
-        //.then(res => console.log(res))
-        .catch(error => console.log('Looks like there was a problem', error));
-}
+fetch(url)
+    .then(checkStatus)
+    .then(res => res.json())
+    .then(storeData)
+    .then(displayData)
+    .catch(error => console.log('Looks like there was a problem', error));
 
 function checkStatus(response) {
     if (response.ok) {
@@ -61,6 +58,19 @@ function displayData(data) {
             modalDisplay(employeeData[index]);
         });
     });
+}
+
+function displayMatches() {
+    const matchArray = findMatches(this.value, employeeData);
+    displayData(matchArray);
+}
+
+function findMatches(wordToMatch, data) {
+    const matches = data.filter(employee => {
+        const regex = new RegExp(wordToMatch, 'gi');
+        return employee.name.first.match(regex) || employee.name.last.match(regex);
+    });
+    return matches;
 }
 
 function modalDisplay(employee) {
@@ -126,8 +136,6 @@ function formatDate(date) {
     return date;
 }
 
-fetchData(url);
-
 //Close modal by clicking outside modal card or close button
 overlay.addEventListener('click', (e) => {
     const prev = overlay.querySelector('.modal-prev');
@@ -157,18 +165,4 @@ overlay.addEventListener('click', (e) => {
 });
 
 //Filter search results
-search.addEventListener('keyup', (e) => {
-    const input = e.target.value.toLowerCase();
-    const cards = employeeList.querySelectorAll('.employee-card');
-
-    cards.forEach((card) => {
-        const name = card.querySelector('.card-name')
-        const text = name.innerText.toLowerCase();
-
-        if (input === '' || text.indexOf(input) !== -1) {
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-});
+search.addEventListener('keyup', displayMatches);
