@@ -1,12 +1,14 @@
 // controls # of api results
-const apiResults = '?results=12';
-const url = 'https://randomuser.me/api/' + apiResults;
+const apiResults = 'results=12';
+const apiFields = 'inc=name,location,email,dob,phone,picture,nat';
+const apiNationality = 'nat=us';
+const url = `https://randomuser.me/api/?${apiResults}&${apiNationality}&${apiFields}`;
 const employeeList = document.getElementById('employee-list');
 const overlay = document.getElementById('overlay');
-// const cardsHTML = document.querySelectorAll('.employee-card');
-// let cards = Array.from(cardsHTML);
+const search = document.getElementById('filter');
 const cards = employeeList.children;
 let employeeData = {};
+let employeeIndex;
 
 function fetchData(url) {
     return fetch(url)
@@ -15,10 +17,8 @@ function fetchData(url) {
         .then(storeData)
         .then(displayData)
         //.then(res => console.log(res))
-        .catch(error => console.log('Looks like there was a problem', error))
+        .catch(error => console.log('Looks like there was a problem', error));
 }
-
-fetchData(url);
 
 function checkStatus(response) {
     if (response.ok) {
@@ -57,8 +57,8 @@ function displayData(data) {
 
     Array.from(cards).forEach((card, index) => {
         card.addEventListener('click', () => {
-            console.log(index)
-            modalDisplay(employeeData[index])
+            employeeIndex = index;
+            modalDisplay(employeeData[index]);
         });
     });
 }
@@ -78,6 +78,11 @@ function modalDisplay(employee) {
     const birthday = formatDate(dob);
     let html = `
         <div class="modal-overlay">
+            <div class="modal-cycle-container">
+                <div class="modal-button modal-prev">
+                    <span> < </span>
+                </div>
+            </div>
             <div class="modal-card">
                 <svg class="modal-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> 
                     <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/> 
@@ -95,11 +100,16 @@ function modalDisplay(employee) {
                     <p>Birthday: ${birthday}</p>
                 </div>
             </div>
+            <div class="modal-cycle-container">
+                <div class="modal-button modal-next">
+                    <span> > </span>
+                </div>
+            </div>
         </div>
         `;
     overlay.innerHTML = html;
     overlay.style.display = 'block';
-};
+}
 
 function formatDate(date) {
     let dd = date.getDate();
@@ -112,14 +122,53 @@ function formatDate(date) {
     if (mm < 10) {
         mm = '0' + mm;
     }
-
-    return date = `${dd}/${mm}/${yy}`;
+    date = `${dd}/${mm}/${yy}`;
+    return date;
 }
+
+fetchData(url);
 
 //Close modal by clicking outside modal card or close button
 overlay.addEventListener('click', (e) => {
-    console.log(e.target.parentElement);
+    const prev = overlay.querySelector('.modal-prev');
+    const next = overlay.querySelector('.modal-next');
+
     if (e.target.classList.contains('modal-close') || e.target.parentElement.classList.contains('modal-close') || e.target.classList.contains('modal-overlay')) {
         overlay.style.display = 'none';
     }
+
+    if (e.target === next || e.target.parentElement === next) {
+        if (employeeIndex === 11) {
+            employeeIndex = 0;
+        } else {
+            employeeIndex++;
+        }
+        modalDisplay(employeeData[employeeIndex]);
+    }
+
+    if (e.target === prev || e.target.parentElement === prev) {
+        if (employeeIndex === 0) {
+            employeeIndex = 11;
+        } else {
+            employeeIndex--;
+        }
+        modalDisplay(employeeData[employeeIndex]);
+    }
+});
+
+//Filter search results
+search.addEventListener('keyup', (e) => {
+    const input = e.target.value.toLowerCase();
+    const cards = employeeList.querySelectorAll('.employee-card');
+
+    cards.forEach((card) => {
+        const name = card.querySelector('.card-name')
+        const text = name.innerText.toLowerCase();
+
+        if (input === '' || text.indexOf(input) !== -1) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
 });

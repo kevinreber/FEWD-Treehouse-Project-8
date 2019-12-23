@@ -14,8 +14,46 @@
 
 .modal {
     &-overlay {
+        display: flex;
         margin: auto;
         position: relative;
+    }
+
+    &-cycle-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        font-size: 48px;
+        margin: auto;
+    }
+
+    &-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all .2s linear;
+        border: 2px solid $color-drkgray;
+        border-radius: 5px;
+        width: 56px;
+        height: 56px;
+        outline: none;
+
+        &:hover {
+            border-color: #ffffff;
+        }
+
+        & span {
+            margin: auto;
+            color: $color-drkgray;
+            transition: all .2s linear;
+
+            &:hover {
+                color: #ffffff;
+            }
+        }
     }
 
     &-card {
@@ -25,7 +63,8 @@
         padding: 24px;
         background-color: #ffffff;
         border-radius: 10px;
-        max-width: 350px;
+        width: 350px;
+        height: 450px;
         box-shadow: 0 0 10px 5px $color-golden;
     }
 
@@ -47,7 +86,7 @@
         }
     }
 
-    &-img{
+    &-img {
         border-radius: 50%;
         border: 3px solid $color-golden;
         box-shadow: 0 0 10px 0 $color-golden;

@@ -1,10 +1,10 @@
-body{
+body {
     background-color: $color-gray;
     width: 95%;
     margin: auto;
 }
 
-header{
+header {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,15 +13,60 @@ header{
     margin: 0;
     box-shadow: 0 2px 10px 2px $color-shadow;
 
-    & h1{
+    & h1 {
         margin-left: 2rem;
         color: $color-gray;
+        width: 100%;
     }
 }
 
-main{
+main {
     margin-top: 104px;
 }
+
+input {
+    outline: none;
+}
+
+// .search-bar {
+//     // display: inline-block;
+//     // position: absolute;
+//     // right: -1035px;
+//     // bottom: 10px;
+//     width: 100%;
+// }
+
+#filter {
+    background-color: $color-gray;
+    position: absolute;
+    right: 35px;
+    bottom: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+    width: 15%;
+    transition: all .1s linear;
+
+    &:focus {
+        width: 25%;
+        background-color: #ffffff;
+        box-shadow: 0 0 8px 3px $color-golden;
+    }
+}
+
+// .icon-wrapper{
+//     position: relative;
+// }
+
+// .finder {
+//     position: absolute;
+//     right: 3px;
+//     height: 20px;
+//     width: 20px;
+//     fill: $color-drkgray;
+//     margin-top: auto;
+//     margin-bottom: auto;
+// }
 
 .employee {
     &-card {
@@ -37,13 +82,13 @@ main{
         //Add transition
         &:hover {
             box-shadow: 0 0 8px 0 $color-golden;
-            
-            & img{
+
+            & img {
                 border: 3px solid $color-golden;
                 box-shadow: 0 0 8px 0 $color-golden;
             }
 
-            & h3{
+            & h3 {
                 color: $color-golden;
             }
         }
@@ -57,12 +102,14 @@ main{
             object-fit: cover;
             transition: all .2s linear;
         }
-        & h3{
+
+        & h3 {
             color: $color-blue;
             transition: all .2s linear;
         }
 
         & .card-text {
+            margin: auto;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -74,10 +121,9 @@ main{
     &-list {
         display: grid;
         width: 100%;
-        margin: 0 auto;
-        grid-template-rows: repeat(4, 1dr);
+        margin: 0 auto 2rem auto;
+        grid-template-rows: repeat(4, 1fr);
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
-        margin-bottom: 2rem;
     }
 }
