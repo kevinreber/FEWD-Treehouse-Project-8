@@ -6,13 +6,33 @@
 
 p {
   font-weight: 100;
-  font-size: 16px;
+  font-size: 12px;
+}
+@media (min-width: 768px) {
+  p {
+    font-size: 14px;
+  }
+}
+@media (min-width: 992px) {
+  p {
+    font-size: 16px;
+  }
 }
 
 h3 {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 2px;
+}
+@media (min-width: 992px) {
+  h3 {
+    font-size: 18px;
+  }
+}
+@media (min-width: 992px) {
+  h3 {
+    font-size: 20px;
+  }
 }
 
 @keyframes turn {
@@ -47,7 +67,19 @@ header {
 header h1 {
   margin-left: 2rem;
   color: #f4f4f4;
-  width: 100%;
+  width: 35%;
+  font-size: 18px;
+}
+@media (min-width: 768px) {
+  header h1 {
+    font-size: 24px;
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  header h1 {
+    font-size: 28px;
+  }
 }
 
 main {
@@ -66,13 +98,23 @@ input {
   padding: 5px;
   border-radius: 3px;
   border: none;
-  width: 15%;
+  width: 250px;
   transition: all 0.1s linear;
 }
+@media (max-width: 576px) {
+  #filter {
+    right: 60px;
+    width: 30%;
+  }
+}
 #filter:focus {
-  width: 25%;
   background-color: #ffffff;
   box-shadow: 0 0 8px 3px goldenrod;
+}
+@media (min-width: 768px) {
+  #filter:focus {
+    width: 25%;
+  }
 }
 
 .employee-card {
@@ -84,6 +126,12 @@ input {
   cursor: pointer;
   box-shadow: 0 0 8px 0 #333333;
   transition: all 0.2s linear;
+}
+@media (max-width: 576px) {
+  .employee-card {
+    margin: auto;
+    width: 90%;
+  }
 }
 .employee-card:hover {
   box-shadow: 0 0 8px 0 goldenrod;
@@ -104,6 +152,12 @@ input {
   object-fit: cover;
   transition: all 0.2s linear;
 }
+@media (max-width: 576px) {
+  .employee-card img {
+    width: 100px;
+    height: 100px;
+  }
+}
 .employee-card h3 {
   color: #3D464F;
   transition: all 0.2s linear;
@@ -119,9 +173,21 @@ input {
   display: grid;
   width: 100%;
   margin: 0 auto 2rem auto;
-  grid-template-rows: repeat(4, 1fr);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-template-columns: auto;
   gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  #employee-list {
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  #employee-list {
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 #overlay {
@@ -148,8 +214,13 @@ input {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  font-size: 48px;
+  font-size: 20px;
   margin: auto;
+}
+@media (min-width: 992px) {
+  .modal-cycle-container {
+    font-size: 48px;
+  }
 }
 .modal-button {
   display: flex;
@@ -160,9 +231,16 @@ input {
   transition: all 0.2s linear;
   border: 2px solid #cecece;
   border-radius: 5px;
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   outline: none;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+@media (min-width: 768px) {
+  .modal-button {
+    width: 56px;
+    height: 56px;
+  }
 }
 .modal-button:hover {
   border-color: #ffffff;
@@ -182,9 +260,15 @@ input {
   padding: 24px;
   background-color: #ffffff;
   border-radius: 10px;
-  width: 350px;
-  height: 450px;
+  width: 300px;
+  height: 400px;
   box-shadow: 0 0 10px 5px goldenrod;
+}
+@media (min-width: 768px) {
+  .modal-card {
+    width: 350px;
+    height: 450px;
+  }
 }
 .modal-close {
   fill: #cecece;
