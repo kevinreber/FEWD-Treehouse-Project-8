@@ -74,12 +74,27 @@ function findMatches(wordToMatch, data) {
 }
 
 function modalDisplay(employee) {
-    const picture = employee.picture.large;
-    const { first, last} = employee.name;
-    const email = employee.email;
-    const { number, name} = employee.location.street;
-    const { city, state, postcode} = employee.location;
-    const phone = employee.phone;
+    //Destructure employee data
+    const {
+        picture: {
+            large: picture
+        },
+        name: {
+            first: firstName,
+            last: lastName
+        },
+        email,
+        phone,
+        location: {
+            street: {
+                number,
+                name
+            },
+            city,
+            state,
+            postcode
+        }
+    } = employee;
     const address = `${number} ${name}, ${state} ${postcode}`;
 
     const dob = new Date(employee.dob.date);
@@ -97,7 +112,7 @@ function modalDisplay(employee) {
                 </svg>
                 <img class="modal-img" src="${picture}"></img>
                 <div class="modal-contact">
-                    <h3 class="modal-name">${first} ${last}</h3>
+                    <h3 class="modal-name">${firstName} ${lastName}</h3>
                     <p class="modal-email">${email}</p>
                     <p class="modal-city">${city}</p>
                 </div>
