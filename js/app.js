@@ -75,15 +75,13 @@ function findMatches(wordToMatch, data) {
 
 function modalDisplay(employee) {
     const picture = employee.picture.large;
-    const firstName = employee.name.first;
-    const lastName = employee.name.last;
+    const { first, last} = employee.name;
     const email = employee.email;
-    const street = `${employee.location.street.number} ${employee.location.street.name}`;
-    const city = employee.location.city;
-    const state = employee.location.state;
-    const postcode = employee.location.postcode;
+    const { number, name} = employee.location.street;
+    const { city, state, postcode} = employee.location;
     const phone = employee.phone;
-    const address = `${street} ${city}, ${state} ${postcode}`;
+    const address = `${number} ${name}, ${state} ${postcode}`;
+
     const dob = new Date(employee.dob.date);
     const birthday = formatDate(dob);
     let html = `
@@ -99,7 +97,7 @@ function modalDisplay(employee) {
                 </svg>
                 <img class="modal-img" src="${picture}"></img>
                 <div class="modal-contact">
-                    <h3 class="modal-name">${firstName} ${lastName}</h3>
+                    <h3 class="modal-name">${first} ${last}</h3>
                     <p class="modal-email">${email}</p>
                     <p class="modal-city">${city}</p>
                 </div>
